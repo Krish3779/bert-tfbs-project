@@ -1,3 +1,13 @@
+# ========================================================================
+# [RUN GUIDE]
+# script/metrics.py  -  metric helpers (library file: do NOT run it directly)
+#
+# Imported by train_metrics.py and test.py.
+#   MetricTracker : collects predictions, .compute() returns acc, precision, recall,
+#                   specificity, F1, MCC, ROC-AUC, PR-AUC, loss, tn/fp/fn/tp
+#   append_csv    : append one row to a CSV (writes the header if the file is new)
+# ========================================================================
+
 import csv
 import os
 

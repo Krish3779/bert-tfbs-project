@@ -1,3 +1,22 @@
+# ========================================================================
+# [RUN GUIDE]
+# script/model_resnet.py  -  BERT-TFBS with the CNN front end replaced by a ResNet
+# (library file: do NOT run it directly; chosen with --arch resnet)
+#
+# Only the CNN front end (conv1, parallel branches, conv3) is replaced. CBAM and the
+# output module are inherited unchanged from script/model.py.
+#
+#   Quick shape check (from ~/BERT-TFBS, container up):
+#      docker compose exec bert-tfbs python -c "import torch; from script.model_resnet import ResNetCNNNET; print(ResNetCNNNET(30).eval()(torch.randn(4,30,768)).shape)"
+#      expected: torch.Size([4, 2])
+#
+#   Train / test:
+#      docker compose exec -d bert-tfbs sh -c "python -u train_metrics.py --arch resnet --tag resnet --seed 41 > /workspace/results_resnet_41.log 2>&1"
+#      docker compose exec bert-tfbs python test.py --arch resnet --weights model_resnet_seed41.pth --out results/test_resnet_seed41.csv
+#
+#   Depth: n_blocks in Bert_Blend_CNN.__init__ (default 2). Use a new --tag when you change it.
+# ========================================================================
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
