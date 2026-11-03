@@ -1,0 +1,14 @@
+*.pth
+*.bak
+*.log
+__pycache__/
+*.pth
+Model/model.pth
+*.bak
+*.log
+__pycache__/
+*.pth
+Model/model.pth
+*.bak
+*.log
+__pycache__/
