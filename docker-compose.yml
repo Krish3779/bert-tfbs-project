@@ -1,3 +1,16 @@
+# ========================================================================
+# [RUN GUIDE]
+# docker-compose.yml  -  GPU container for BERT-TFBS (project mounted at /workspace)
+#
+# Run in a WSL terminal, from ~/BERT-TFBS:
+#      docker compose up -d --build      build the image (first time / after Dockerfile or requirements change) and start
+#      docker compose up -d              start (after a reboot)
+#      docker compose ps                 is it running?
+#      docker compose exec bert-tfbs bash   open a shell inside the container
+#      docker compose down               stop and remove the container
+# Check the GPU:  docker compose exec bert-tfbs python -c "import torch; print(torch.cuda.is_available())"
+# ========================================================================
+
 services:
   bert-tfbs:
     build: .

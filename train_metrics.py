@@ -1,3 +1,29 @@
+# ========================================================================
+# [RUN GUIDE]
+# train_metrics.py  -  train ONE model variant, log metrics every epoch
+#
+# Run in a WSL terminal, from ~/BERT-TFBS (project is /workspace in the container).
+#
+#   0. start the container (once per boot):
+#        docker compose up -d
+#   1. train in the background, output to a log file:
+#        docker compose exec -d bert-tfbs sh -c "python -u train_metrics.py --arch full --tag full --seed 41 > /workspace/results_full_41.log 2>&1"
+#      --arch   full | v1 | v2 | resnet   which model to train
+#      --tag    label for output file names (keep it equal to --arch)
+#      --seed   random seed (use 41, 42, 43)
+#      --epochs default 15
+#   2. watch progress (Ctrl+C stops watching, NOT training):
+#        tail -f results_full_41.log
+#      is it still running? (no output = finished):
+#        docker compose exec bert-tfbs pgrep -af train_metrics
+#   3. outputs:
+#        Dataset/<folder>/model_<tag>_seed<N>.pth    weights (overwritten every epoch)
+#        results/metrics_<tag>_seed<N>.csv           per-epoch train/test metrics
+#   4. then test it:  python test.py --arch <arch> --weights model_<tag>_seed<N>.pth
+#
+# Train ONE job at a time on a 6 GB GPU.
+# ========================================================================
+
 import argparse
 import os
 import random

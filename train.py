@@ -1,3 +1,15 @@
+# ========================================================================
+# [RUN GUIDE]
+# train.py  -  ORIGINAL author's training script (reference / baseline only)
+#
+# Prefer train_metrics.py (adds metrics, eval mode, seeds, CSV logs).
+# If you do run this one, from ~/BERT-TFBS in a WSL terminal:
+#      docker compose up -d
+#      docker compose exec -d bert-tfbs sh -c "python -u train.py > /workspace/train.log 2>&1"
+#      tail -f train.log
+# It saves Dataset/<folder>/model.pth  (this overwrites a copy of the shipped weights).
+# ========================================================================
+
 import os
 import random
 
